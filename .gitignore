@@ -1,0 +1,86 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Virtual environments
+venv/
+.env/
+.env.bak/
+.venv/
+env/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# PyCharm & VS Code
+.idea/
+.vscode/
+*.code-workspace
+
+# Logs
+*.log
+*.out
+*.err
+
+# Environment files
+*.env
+*.ini
+
+# Cache
+.cache/
+*.cache
+.tmp/
+temp/
+tmp/
+
+# ML / LLM / HuggingFace models
+models/
+model/
+saved_models/
+checkpoints/
+weights/
+wheels/
+*.bin
+*.safetensors
+*.pt
+*.pth
+
+# Transformers cache
+~/.cache/huggingface/
+huggingface/
+
+# LlamaIndex / Chroma / FAISS
+storage/
+vectorstore/
+db/
+chroma/
+index/
+faiss_index/
+
+# Docker
+docker_data/
+docker_volume/
+.docker/
+
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
