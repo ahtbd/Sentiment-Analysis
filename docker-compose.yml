@@ -1,40 +1,41 @@
 services:
-  vectorstore:
-    build:
-      context: .
-      dockerfile: ./vectorstore_service/Dockerfile
-    container_name: vectorstore
-    volumes:
-      - ./vector_data:/data
-    environment:
-      - EMBED_DIM=768
-      - VECTORSTORE_DATA_DIR=/data
-    ports:
-      - "8001:8001"
-
-  api:
-    build:
-      context: .
-      dockerfile: ./api_service/Dockerfile
-    container_name: api
-    volumes:
-      - ./models/distilbert-sst2:/models/distilbert-sst2:ro
-    environment:
-      - MODEL_DIR=/models/distilbert-sst2
-      - VECTORSTORE_URL=http://vectorstore:8001
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: chroma
     ports:
       - "8000:8000"
-    depends_on:
-      - vectorstore
+    volumes:
+      - chroma_data:/data
 
-  ui:
-    build:
-      context: .
-      dockerfile: ./ui_service/Dockerfile
-    container_name: ui
-    environment:
-      - API_URL=http://api:8000
+  sentiment-api:
+    build: .
+    container_name: sentiment-api
     ports:
-      - "7880:7880"
+      - "7860:7860"
+    environment:
+      - HF_HOME=/hf
+      - CHROMA_HOST=chroma
+      - CHROMA_PORT=8000
+    volumes:
+      - /home/ahtuh-in/.cache/huggingface:/hf:ro
+    command: ["uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "7860"]
     depends_on:
-      - api
+      - chroma
+
+  sentiment-ui:
+    build: .
+    container_name: sentiment-ui
+    ports:
+      - "7861:7860"
+    environment:
+      - HF_HOME=/hf
+      - CHROMA_HOST=chroma
+      - CHROMA_PORT=8000
+    volumes:
+      - /home/ahtuh-in/.cache/huggingface:/hf:ro
+    command: ["python", "-m", "app.ui"]
+    depends_on:
+      - sentiment-api
+
+volumes:
+  chroma_data:
