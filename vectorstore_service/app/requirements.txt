@@ -1,4 +1,0 @@
-flask
-faiss-cpu
-numpy
-gunicorn
