@@ -30,10 +30,10 @@ sentiment-analysis-project/
 ├── app/
 │   ├── api.py           # FastAPI backend (REST API)
 │   ├── ui.py            # Gradio UI (calls API)
-│   ├── model.py         # Sentiment model loader (offline)
+│   ├── model.py         # Sentiment model loader
 │   ├── predict.py       # Inference logic
 │   ├── preprocess.py   # Text cleaning
-│   ├── vector_store.py # ChromaDB + embedding logic (offline)
+│   ├── vector_store.py # ChromaDB + embedding logic
 │   └── __init__.py
 │
 ├── Dockerfile
